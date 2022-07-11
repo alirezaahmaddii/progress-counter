@@ -1,4 +1,3 @@
-<template>
 <!--  <div class="container">-->
 <!--    <div class="my-0 mx-auto border-info">-->
 <!--      <div class="d-flex flex-column">-->
@@ -24,68 +23,150 @@
 <!--    </div>-->
 <!--  </div>-->
 
-    <CircleProgress
-        :percent="1"
-        :viewport="true"
-        :show-percent="true"
-        :is-gradient="true"
-    />
-  </template>
+<template>
+  <div
+      class="card-img w-50 d-flex text-center flex-column my-0 mx-auto align-items-center container rounded pt-5 mt-5 pb-5  ">
+    <div class="progress-box pt-5 text-center align-items-center">
+      <CircleProgress
+          :percent="number"
+          :show-percent="false"
+          :viewport="true"
+          :border-width="7"
+          :is-gradient="true"
+          :gradient="{
+        angle: 90,
+        startColor: '#157dc3',
+        stopColor: '#ffffff'
+    }"
 
-
-
-
+          :is-bg-shadow="true"
+          :bg-shadow="{
+        inset: true,
+        vertical: 8,
+        horizontal: 4,
+        blur: 4,
+        opacity: 0.4,
+        color: '#ffffff',
+    }"
+          linecao="butt "
+          empty-color="red"
+          :border-bg-width="5"
+      />
+      <span class="set-counter">{{ set }}</span>
+      <div class="d-flex w-100 pb-5 justify-content-between flex-row-reverse align-items-center">
+        <h1>26&deg</h1>
+        <div>
+          <figure>
+            <img src="/image/icons8-abscissa-48.png" alt="#">
+          </figure>
+        </div>
+      </div>
+      <div>
+        <figure>
+          <img src="../public/gif/ecercise.gif" alt="gift" class="rounded" style="width: 179px;height: 139px;">
+        </figure>
+      </div>
+    </div>
+  </div>
+</template>
 <script>
 import RadialProgressBar from "vue3-radial-progress";
 import CircleProgress from "vue3-circle-progress";
-import "vue3-circle-progress/dist/circle-progress.css";
-import { ref, defineComponent , onMounted } from "vue";
+import {ref, defineComponent, onMounted} from "vue";
+
 export default {
 
-components:{
-  RadialProgressBar,
-  CircleProgress,
-},
-  data: () => ({
-    // finallProgs:15
-  }),
-methods:{
-  setup() {
-    const percent = ref(75);
-
-    onMounted(() => {
-      setInterval(() => {
-        if (percent.value === 25) {
-          percent.value = 75;
-        } else {
-          percent.value = 25;
-        }
-      }, 1000);
-    });
-
-    return {
-      percent,
-    };
+  components: {
+    RadialProgressBar,
+    CircleProgress,
   },
-  // setup(){
-  //   const completedSteps = ref(0);
-  //   const totalSteps = ref(10);
-  //
-  //   return {
-  //     completedSteps,
-  //     totalSteps
-  //   }
-  // },
-},
+  data: () => ({
+    number: 0,
+    set: 0
+  }),
+  methods: {
+    setup() {
+      const percent = ref(75);
+      onMounted(() => {
+        setInterval(() => {
+          if (percent.value === 25) {
+            percent.value++;
+            console.log('plus')
+          } else {
+            percent.value = 0;
+          }
+        }, 1000);
+      });
+
+      return {
+        percent,
+      };
+    },
+    // setup(){
+    //   const completedSteps = ref(0);
+    //   const totalSteps = ref(10);
+    //
+    //   return {
+    //     completedSteps,
+    //     totalSteps
+    //   }
+    // },
+    counter() {
+      setInterval((ej) => {
+        //counter animation
+        if (this.number !== 100 && this.set <= 5) {
+          ej = this.number++;
+        } else if (this.number >= -1 && this.set === 4) {
+          this.number = 0
+        } else {
+          this.number = 0
+        }
+        // counter set
+        if (this.number === 100) {
+          // console.log(4)
+          this.set++;
+        }
+      }, 100);
+
+
+    },
+    // setcounter(){
+    //       setInterval(() =>{
+    // },100)
+
+    // }
+
+  },
   mounted() {
-  this.setup();
+    this.setup();
+    this.counter(this.number);
+    // this.setcounter()
   }
 }
 </script>
 
 
 <style lang="scss">
-body * {
-  background-color: orange;
+body {
+
+}
+
+.card-img {
+  padding: 0;
+}
+
+.set-counter {
+  position: relative;
+  top: -137px;
+  font-size: 60px;
+  font-weight: bold;
+
+}
+
+.progress-box {
+  background: #66666691;
+  padding: 71px;
+  backdrop-filter: blur(70px);
+  border-radius: 15px;
 }
 </style>
