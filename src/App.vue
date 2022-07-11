@@ -31,26 +31,8 @@
           :percent="number"
           :show-percent="false"
           :viewport="true"
-          :border-width="7"
-          :is-gradient="true"
-          :gradient="{
-        angle: 90,
-        startColor: '#157dc3',
-        stopColor: '#ffffff'
-    }"
-
-          :is-bg-shadow="true"
-          :bg-shadow="{
-        inset: true,
-        vertical: 8,
-        horizontal: 4,
-        blur: 4,
-        opacity: 0.4,
-        color: '#ffffff',
-    }"
-          linecao="butt "
-          empty-color="red"
-          :border-bg-width="5"
+          :border-width="10"
+          :border-bg-width="10"
       />
       <span class="set-counter">{{ set }}</span>
       <div class="d-flex w-100 pb-5 justify-content-between flex-row-reverse align-items-center">
@@ -114,7 +96,7 @@ export default {
     counter() {
       setInterval((ej) => {
         //counter animation
-        if (this.number !== 100 && this.set <= 5) {
+        if (this.number !== 85 && this.set <= 5) {
           ej = this.number++;
         } else if (this.number >= -1 && this.set === 4) {
           this.number = 0
@@ -122,7 +104,7 @@ export default {
           this.number = 0
         }
         // counter set
-        if (this.number === 100) {
+        if (this.number === 85) {
           // console.log(4)
           this.set++;
         }
@@ -165,8 +147,13 @@ body {
 
 .progress-box {
   background: #66666691;
-  padding: 71px;
+  padding: 35px;
   backdrop-filter: blur(70px);
   border-radius: 15px;
+}
+svg{
+  stroke-dasharray: 457;
+  transform: rotate(117deg) !important;
+  stroke-linecap: round;
 }
 </style>
